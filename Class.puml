@@ -1,0 +1,86 @@
+@startuml
+class com.zj.GameData {
++ {static} int GAME_FRAME_WIDTH
++ {static} int GAME_FRAME_HEIGHT
++ {static} BufferedImage[] gameImages
++ {static} int currentLevel
++ {static} byte[][] currentMap
++ {static} void initGameImages()
++ {static} Point initCurrentMap()
+}
+class com.zj.ImageState {
++ {static} byte NONE
++ {static} byte WALL
++ {static} byte BOX
++ {static} byte BOX_END
++ {static} byte END
++ {static} byte MAN_DOWN
++ {static} byte MAN_LEFT
++ {static} byte MAN_RIGHT
++ {static} byte MAN_UP
++ {static} byte GRASS
++ {static} byte MAN_DOWN_END
++ {static} byte MAN_LEFT_END
++ {static} byte MAN_RIGHT_END
++ {static} byte MAN_UP_END
++ {static} List<Byte> boxs
++ {static} List<Byte> grassAndEnd
++ {static} List<Byte> manEnds
++ {static} boolean oneStepIsBoxs(byte)
++ {static} boolean twoStepIsGrassOrEnd(byte)
++ {static} boolean oneStepIsGrassOrEnd(byte)
++ {static} byte twoSetpIsBoxEndByEnd(byte)
++ {static} byte oneSetpIsManEndByBox(byte,byte)
++ {static} byte oneStepIsManEndByEnd(byte,byte)
++ {static} byte isGrassOrEnd(byte)
+}
+class com.zj.Sound {
+- String path
+- String file
+~ void loadSound()
+}
+class com.zj.GameLevelMap {
+~ {static} byte[][][] levelMap
+- {static} int count
++ {static} byte[][] getMap(int)
++ {static} int getCount()
+}
+class com.zj.GamePanel {
+- Point positionMap
++ void paint(Graphics)
+}
+class com.zj.Player {
+- int row
+- int col
+~ List<StepRecord> stepRecords
++ void initManPosition()
++ void addStepRecord(int,int,byte[][])
++ void move(int)
++ boolean isIntoNext()
++ void intoNextLevel()
++ void undo()
+}
+class com.zj.GameFrame {
+~ GamePanel gamePanel
+~ Player player
+}
+class com.zj.StepRecord {
+- int row
+- int col
+- byte[][] map
++ byte[][] copyMap(byte[][])
++ int getRow()
++ void setRow(int)
++ int getCol()
++ void setCol(int)
++ byte[][] getMap()
++ void setMap(byte[][])
+}
+class com.zj.Main {
++ {static} void main(String[])
+}
+
+
+com.zj.JPanel <|-- com.zj.GamePanel
+com.zj.JFrame <|-- com.zj.GameFrame
+@enduml

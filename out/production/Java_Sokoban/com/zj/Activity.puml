@@ -1,0 +1,37 @@
+@startuml
+start
+:Game Start;
+:Initialize Level;
+while (true)
+    if(Player is Moving?) then (yes)
+        :Role Moves;
+        if(Box is Pushed?) then (yes)
+            if(Box is Pushed to Goal?) then (yes)
+                if(Player passed current level?) then (yes)
+                    if(Player passed All levels?) then (yes)
+                        stop;
+                    else (no)
+                        :Load Next Level;
+                    endif
+                else (no)
+                    :Role Moves;
+                endif
+            endif
+        else (no)
+            :Button Clicked?;
+            if (Next Level Button Clicked?) then (yes)
+                :Load Next Level;
+            else (no)
+                if (Previous Level Button Clicked?) then (yes)
+                    :Load Previous Level;
+                else (no)
+                    if (Restart Button Clicked?) then (yes)
+                        :Restart Level;
+                    endif
+                endif
+            endif
+        endif
+    endif
+endwhile
+stop
+@enduml

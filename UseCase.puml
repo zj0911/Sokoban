@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+actor Player as P
+rectangle "Sokoban" {
+  usecase "Start" as Start
+  usecase "Move" as MoveBox
+  usecase "Go to Next Level" as NextLevel
+  usecase "Go to Previous Level" as PreviousLevel
+  usecase "Restart" as Restart
+  usecase "Undo" as Undo
+
+}
+
+P --> Start
+P --> MoveBox
+P --> NextLevel
+P --> PreviousLevel
+P --> Restart
+P --> Undo
+
+Start --> NextLevel: Victory condition achieved
+NextLevel --> Start: Go to next level
+
+PreviousLevel --> Start: Go to previous level
+
+Restart --> Start: Restart game
+
+Undo --> MoveBox: Revert last move
+
+@enduml
